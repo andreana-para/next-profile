@@ -1,0 +1,30 @@
+.page {
+    padding: 20px;
+}
+
+.main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+#search {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #000;
+    box-sizing: border-box;
+}

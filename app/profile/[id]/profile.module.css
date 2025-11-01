@@ -1,0 +1,49 @@
+.page {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--background);
+    color: var(--foreground);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 1rem;
+    margin: 8px 0;
+    font-weight: 500;
+  }
+  
+  .email {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .bio {
+    font-size: 1rem;
+    margin: 16px 0;
+    line-height: 1.5;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 50px;
+  }
+  
