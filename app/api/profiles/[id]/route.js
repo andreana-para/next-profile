@@ -1,7 +1,13 @@
-let profiles = [
-    { id: 1, name: "Ava Lee", major: "CS", year: 2, gpa: 3.6 },
-    { id: 2, name: "Ben Park", major: "CGT", year: 3, gpa: 3.2 },
-]
+import { PrismaClient, prismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamnic'
+
+// let profiles = [
+//     { id: 1, name: "Ava Lee", major: "CS", year: 2, gpa: 3.6 },
+//     { id: 2, name: "Ben Park", major: "CGT", year: 3, gpa: 3.2 },
+// ]
 
 export async function GET(request) {
     const searchParams = request.nextURL.searchParams;
@@ -9,24 +15,27 @@ export async function GET(request) {
     const name = searchParams.get("name") || "";
     const major = searchParams.get("major") || "";
 
+    const students = await prisma.students.findMany();
+    let filteredProfiles = students;
+
     if (year) {
-        profiles = profiles.filter(
+        filteredProfiles = filteredProfiles.filter(
             (profile) => profile.year.toString() === year
         );
     }
 
     if (name) {
-        profiles = profiles.filter(
+        filteredProfiles = filteredProfiles.filter(
             (profile) = profile.name.toLowerCase().includes(name.toLowerCase())
         );
     }
 
     if (major) {
-        profiles = profiles.filter(
+        filteredProfiles = filteredProfiles.filter(
             (profile) = profile.major.toLowerCase() === major.toLowerCase()
         );
     }
-    return Response.json({ data: profiles }, {status: 200 });
+    return Response.json({ data: filteredProfiles }, {status: 200 });
 }
 
 export async function POST(request) {
@@ -49,7 +58,7 @@ export async function POST(request) {
             year: parseInt(newProfile.year),
             gpa: parseInt(newProfile.gpa)
         };
-        profiles.push(newProfileData);
+        filteredProfiles.push(newProfileData);
         return Response.json(newProfileData, { status: 201});
     }catch(error){
         return Response.json({error: "Invalid data format"}, {status: 400});
@@ -59,7 +68,7 @@ export async function POST(request) {
 export async function DELETE(request) {
     const searchParams = request.nextURL.searchParams;
     const id = searchParams.get("id");
-    profiles = profiles.filter((profile) => profile.id !== parseInt(id));
+    filteredProfiles = filteredProfiles.filter((profile) => profile.id !== parseInt(id));
     return Response.json({ message: "Profile deleted" }, {status: 200 });
 }
 
@@ -68,13 +77,13 @@ export async function PUT(request) {
     const id = searchParams.get("id");
     const updates = await request.json();
 
-    const index = profiles.findIndex((profile) => profile.id === parseInt(id));
+    const index = filteredProfiles.findIndex((profile) => profile.id === parseInt(id));
 
     if (index === -1) {
         return Response.json({ error: "Profile not found" }, { status: 404 });
     }
 
-    const profile = profiles[index];
+    const profile = filteredProfiles[index];
 
     if (updates.name !== undefined) {
         if (typeof updates.name !== "string" || updates.name.trim() === "") {
