@@ -2,7 +2,6 @@ import { PrismaClient, prismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export const runtime = 'nodejs'
-export const dynamic = 'force-dynamnic'
 
 // let profiles = [
 //     { id: 1, name: "Ava Lee", major: "CS", year: 2, gpa: 3.6 },
