@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
           <nav>
             <Link href="/" style={{ marginRight: "16px" }}>Home</Link>
             <Link href="/about">About</Link>
+            <Link href="/add-profile">Add Profile</Link>
           </nav>
         </header>
         <main>{children}</main>

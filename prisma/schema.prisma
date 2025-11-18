@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -19,4 +18,15 @@ model Students{
   major String
   year Int
   gpa Float
+}
+
+model profiles {
+  id Int @id @default(autoincrement())
+  name String
+  title String
+  email String @unique
+  bio String
+  image_url String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

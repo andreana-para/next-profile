@@ -1,24 +1,26 @@
 import styles from "./page.module.css"
 import Link from "next/link"
 import Card from "@/components/Card"
+import prisma from "@/lib/prisma";
+
+export const runtime = "nodejs"
 
 async function getTitles() {
-    const response = await fetch("https://web.ics.purdue.edu/%7Ezong6/profile-app/get-titles.php", {
-        next: { revalidate: 60 }
-    })
-    const data = await response.json()
-    return data ? data.titles : []
-
-}
+    const profiles = await prisma.profiles.findMany({
+        distinct: ["title"],
+        select: {title: true}
+    });
+    return profiles ? profiles.map((p) => p.title): [];
+} 
 
 async function getProfiles(title, search) {
-    const response = await fetch(
-        `https://web.ics.purdue.edu/~zong6/profile-app/fetch-data-with-filter.php?title=${title}&name=${search}&limit=1000`, {
-        next: { revalidate: 60 }
-    }
-    )
-    const data = await response.json()
-    return data ? data.profiles : []
+    const profiles = await prisma.profiles.findMany({
+        where: {
+            ...(title && { title: {contains: title, mode: "insensitive"} }),
+            ...(search && {name: {contains: search, mode: "insentitive"}}),
+        },
+    });
+    return profiles;
 }
 
 export default async function Home({ searchParams }) {
