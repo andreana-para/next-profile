@@ -12,7 +12,6 @@ export default async function EditProfilePage({params}) {
         },
 
     });
-    console.log(profile)
     return (
         <>
             <h1>Edit Profile</h1>
