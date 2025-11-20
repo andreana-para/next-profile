@@ -1,5 +1,6 @@
 import "./globals.css";
-import Link from "next/link";
+import SessionProvider from "@/components/SessionProvider";
+import NavBar from "@/components/NavBar"
 
 export const metadata = {
   title: "My App",
@@ -11,11 +12,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <header style={{ padding: "12px 20px", borderBottom: "1px solid #ddd", marginBottom: "20px" }}>
-          <nav>
-            <Link href="/" style={{ marginRight: "16px" }}>Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/add-profile">Add Profile</Link>
-          </nav>
+          <SessionProvider>
+            <NavBar />
+          </SessionProvider>
         </header>
         <main>{children}</main>
       </body>

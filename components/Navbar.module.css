@@ -1,0 +1,55 @@
+/* navbar */
+.navbar {
+    background-color: var(--secondary-backrgound-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .navbar ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .navbar ul li {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+  
+  .navbar ul li a, .signInLink {
+      font-size: 1.125rem;
+      font-weight: 600;
+    color: var(--button-text-color);
+  }
+  
+  .navbar ul li a:hover, .signInLink:hover {
+    color: var(--link-hover-color);
+  }
+  
+  .authSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .userEmail {
+    color: var(--button-text-color);
+    font-size: 0.9rem;
+  }
+  
+  
+  /* .signInLink {
+    color: var(--button-text-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+  
+  .signInLink:hover {
+    color: var(--link-hover-color);
+  } */
